@@ -36,6 +36,4 @@ const server = net.createServer(socket=>{
         clients.splice(idx,1);
     })
 
-})
-
-server.listen(4000);
+}).listen(4000);
