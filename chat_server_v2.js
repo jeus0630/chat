@@ -1,18 +1,28 @@
 const net = require('net');
 
 const clients = [];
+
 const server = net.createServer(socket=>{
+    let nickName = '';
+
     console.log("새로운 유저가 연결되었습니다.");
 
     clients.push(socket);
 
     socket.on("data",buf=>{
+
+        if(!nickName){
+            nickName = buf.toString();
+            return;
+        }
+
         clients.forEach(el=>{
+
             if(el === socket){
                 return;
             }
 
-            el.write(buf);
+            el.write(`${nickName} : ${buf.toString()}`);
         })
     })
 
